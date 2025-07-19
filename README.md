@@ -1,27 +1,53 @@
-# AffordabilityCalculator
+# 💰 Fin Africa Affordability Calculator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+A simple, elegant affordability calculator for Fin Africa that helps determine loan eligibility based on a user's monthly income and deductions.
 
-## Development server
+![UI Screenshot](./assets/screenshot.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This calculator is part of Fin Africa's loan prequalification tool. Users input their gross monthly income and deductions, and the calculator returns:
 
-## Build
+- ✅ Net Income
+- 💸 Maximum Affordable Loan (50% of Net Income)
+- 📊 Loan Eligibility Status
+- 🧠 Friendly Explanation Message
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🎯 Features
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Clean and modern UI inspired by [Fin Africa](https://fin.africa) and LeadingSalons layout
+- Responsive design (desktop + mobile)
+- Real-time backend calculation
+- Eligibility feedback & breakdown
+- Built with Angular 18 + Spring Boot
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## ⚙️ Technologies Used
 
-## Further help
+### Frontend
+- [Angular 18](https://angular.io/)
+- TypeScript
+- SCSS
+- Responsive HTML + CSS
+- RxJS
+- Angular Forms
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Backend
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- Java 17+
+- RESTful API
+- CORS configured
+
+---
+
+## 🧪 Sample Calculation Logic
+
+```ts
+netIncome = grossIncome - deductions;
+maxLoan = 0.5 * netIncome;
+eligible = maxLoan >= 20000;
