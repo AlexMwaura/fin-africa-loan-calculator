@@ -54,8 +54,6 @@ The application provides:
 
 ## 📁 Project Structure
 
-```
-
 affordability-calculator/
 ├── src/
 │   ├── app/
@@ -63,18 +61,16 @@ affordability-calculator/
 │   │   │   └── calculator/
 │   │   │       ├── calculator.component.ts
 │   │   │       ├── calculator.component.html
-│   │   │       └── calculator.component.scss
+│   │   │       ├── calculator.component.scss
 │   │   ├── services/
 │   │   │   └── calculator.service.ts
-│   │   └── app.component.ts / .html
+│   │   └── app.component.html
 │   └── styles/
-│       └── (global styles / variables)
+│           └── _variables.scss (Fin Africa inspired theme)
 ├── angular.json
 ├── package.json
-├── tsconfig.json
-└── README.md
+└── ...
 
-````
 
 ---
 
