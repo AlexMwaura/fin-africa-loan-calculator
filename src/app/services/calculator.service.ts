@@ -22,20 +22,19 @@ export class CalculatorService {
 
   constructor(private http: HttpClient) { }
 
+
 calculateAffordability(
-    grossIncome: number,
-    totalDeductions: number,
-    token?: string 
-  ): Observable<LoanCalculationResponse> {
-    const request: LoanCalculationRequest = {
-      grossIncome,
-      totalDeductions
-    };
+  grossIncome: number,
+  totalDeductions: number,
+  token?: string
+): Observable<LoanCalculationResponse> {
+  const request: LoanCalculationRequest = { grossIncome, totalDeductions };
 
-    const headers = token
-      ? new HttpHeaders({ Authorization: `Bearer ${token}` })
-      : undefined;
+  const headers = token?.trim()
+    ? new HttpHeaders({ Authorization: `Bearer ${token.trim()}` }) // ✅ cleanly formatted
+    : undefined;
 
-    return this.http.post<LoanCalculationResponse>(this.apiUrl, request, { headers });
-  }
+  return this.http.post<LoanCalculationResponse>(this.apiUrl, request, { headers });
+}
+
 }

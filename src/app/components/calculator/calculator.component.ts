@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalculatorService } from '../../services/calculator.service';
+import { CalculatorService, LoanCalculationResponse } from '../../services/calculator.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -23,12 +23,20 @@ export class CalculatorComponent {
   constructor(private calcService: CalculatorService) {}
 
   calculate() {
-    this.calcService.calculateAffordability(this.grossIncome, this.deductions).subscribe(res => {
-      this.netIncome = res.netIncome;
-      this.maxLoan = res.maxLoan;
-      this.isEligible = res.eligible;
-      this.message = res.message;
-      this.showResults = true;
+    const token = localStorage.getItem('auth_token'); // or wherever your token is stored
+    this.calcService.calculateAffordability(this.grossIncome, this.deductions, token || '').subscribe({
+      next: (res: LoanCalculationResponse) => {
+        this.netIncome = res.netIncome!;
+        this.maxLoan = res.maxLoanAmount!;
+        this.isEligible = res.eligible!;
+        this.message = res.message!;
+        this.showResults = true;
+      },
+      error: (err) => {
+        console.error('Loan calculation error', err);
+        this.message = 'Failed to calculate loan eligibility. Please try again.';
+        this.showResults = true;
+      }
     });
   }
 }
