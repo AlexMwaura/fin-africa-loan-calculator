@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { CalculatorService } from '../../services/calculator.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,FormsModule,RouterModule],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss'
 })

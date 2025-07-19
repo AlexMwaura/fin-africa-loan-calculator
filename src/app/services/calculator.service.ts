@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface LoanCalculationRequest {
+  grossIncome: number;
+  totalDeductions: number;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
