@@ -31,7 +31,7 @@ calculateAffordability(
   const request: LoanCalculationRequest = { grossIncome, totalDeductions };
 
   const headers = token?.trim()
-    ? new HttpHeaders({ Authorization: `Bearer ${token.trim()}` }) // ✅ cleanly formatted
+    ? new HttpHeaders({ Authorization: `Bearer ${token.trim()}` })
     : undefined;
 
   return this.http.post<LoanCalculationResponse>(this.apiUrl, request, { headers });
