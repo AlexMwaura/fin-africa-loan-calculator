@@ -99,7 +99,7 @@ eligible = maxLoan >= 20000;
 1. Clone this repo:
 
 ```bash
-git clone https://github.com/AlexMwaura/fin-africa-loan-calculator-frontend.git
+git clone https://github.com/AlexMwaura/fin-africa-loan-calculator.git
 cd fin-africa-loan-calculator-frontend
 ```
 
@@ -120,27 +120,6 @@ ng serve
 ```
 http://localhost:4200
 ```
-
----
-
-### 🔐 Authentication
-
-1. Authenticate via the backend login endpoint:
-
-   ```http
-   POST /api/v1/auth/login
-   ```
-2. Copy the JWT token from the response.
-3. Save it in localStorage:
-
-   ```js
-   localStorage.setItem('auth_token', '<your-token>');
-   ```
-4. All calculator API calls will automatically include the token as:
-
-   ```
-   Authorization: Bearer <token>
-   ```
 
 ---
 
