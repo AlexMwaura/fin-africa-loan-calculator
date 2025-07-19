@@ -1,26 +1,96 @@
 <div class="calculator-container">
-  <div class="input-section">
-    <h2>Affordability Calculator</h2>
-    <form (ngSubmit)="calculate()" #calcForm="ngForm">
-      <label for="income">Gross Monthly Income (KES)</label>
-      <input type="number" id="income" name="income" [(ngModel)]="grossIncome" required />
-
-      <label for="deductions">Monthly Deductions (KES)</label>
-      <input type="number" id="deductions" name="deductions" [(ngModel)]="deductions" required />
-
-      <button type="submit" [disabled]="!calcForm.form.valid">Calculate</button>
-    </form>
-  </div>
-
-  <div class="result-section" *ngIf="showResults">
-    <h3>Results</h3>
-    <p><strong>Net Income:</strong> KES {{ netIncome | number:'1.2-2' }}</p>
-    <p><strong>Maximum Affordable Loan:</strong> KES {{ maxLoan | number:'1.2-2' }}</p>
-    <p><strong>Eligibility Status:</strong>
-      <span [ngClass]="{ 'eligible': isEligible, 'not-eligible': !isEligible }">
-        {{ isEligible ? 'Eligible ✅' : 'Not Eligible ❌' }}
-      </span>
-    </p>
-    <p class="message">{{ message }}</p>
+  <div class="calculator-card">
+    <div class="header">
+      <h1>Fin's Affordability Calculator</h1>
+      <p>Discover your maximum loan eligibility in seconds</p>
+    </div>
+    
+    <div class="content">
+      <div class="input-section">
+        <form (ngSubmit)="calculate()" #calcForm="ngForm">
+          <div class="form-group">
+            <label for="income">Gross Monthly Income</label>
+            <div class="input-wrapper">
+              <span class="currency-prefix">KES</span>
+              <input 
+                type="number" 
+                id="income" 
+                name="income" 
+                [(ngModel)]="grossIncome" 
+                required 
+                min="0" 
+                step="100"
+                class="form-control"
+              />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="deductions">Monthly Deductions</label>
+            <div class="input-wrapper">
+              <span class="currency-prefix">KES</span>
+              <input 
+                type="number" 
+                id="deductions" 
+                name="deductions" 
+                [(ngModel)]="deductions" 
+                required 
+                min="0" 
+                step="100"
+                class="form-control"
+              />
+            </div>
+          </div>
+          
+          <button 
+            type="submit" 
+            [disabled]="!calcForm.form.valid || isLoading" 
+            class="calculate-btn"
+          >
+            <span *ngIf="isLoading" class="loading"></span>
+            {{ isLoading ? 'Calculating...' : 'Calculate Eligibility' }}
+          </button>
+        </form>
+      </div>
+      
+      <div class="result-section">
+        <div 
+          class="results-container" 
+          [class.show]="showResults"
+          *ngIf="showResults"
+        >
+          <div class="result-card">
+            <div class="result-item">
+              <span class="result-label">Net Income:</span>
+              <span class="result-value">KES {{ netIncome | number:'1.2-2' }}</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Maximum Affordable Loan:</span>
+              <span class="result-value">KES {{ maxLoan | number:'1.2-2' }}</span>
+            </div>
+          </div>
+          
+          <div 
+            class="eligibility-status"
+            [ngClass]="{ 'eligible': isEligible, 'not-eligible': !isEligible }"
+          >
+            {{ isEligible ? 'Eligible' : 'Not Eligible' }}
+            <span class="icon">{{ isEligible ? '✅' : '❌' }}</span>
+          </div>
+          
+          <div class="message">
+            {{ message }}
+          </div>
+        </div>
+        
+        <div *ngIf="!showResults" class="placeholder-content">
+          <div style="text-align: center; color: #64748b; padding: 2rem;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">💰</div>
+            <h3 style="margin-bottom: 1rem; color: #374151;">Ready to Calculate</h3>
+            <p>Enter your income details to see your loan eligibility</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -19,24 +19,41 @@ export class CalculatorComponent {
   isEligible = false;
   message = '';
   showResults = false;
+  isLoading = false;
 
   constructor(private calcService: CalculatorService) {}
 
   calculate() {
-    const token = localStorage.getItem('auth_token'); // or wherever your token is stored
-    this.calcService.calculateAffordability(this.grossIncome, this.deductions, token || '').subscribe({
-      next: (res: LoanCalculationResponse) => {
-        this.netIncome = res.netIncome!;
-        this.maxLoan = res.maxLoanAmount!;
-        this.isEligible = res.eligible!;
-        this.message = res.message!;
-        this.showResults = true;
-      },
-      error: (err) => {
-        console.error('Loan calculation error', err);
-        this.message = 'Failed to calculate loan eligibility. Please try again.';
-        this.showResults = true;
-      }
-    });
+    this.isLoading = true;
+    
+    setTimeout(() => {
+      const token = localStorage.getItem('auth_token');
+      
+      this.calcService.calculateAffordability(this.grossIncome, this.deductions, token || '').subscribe({
+        next: (res: LoanCalculationResponse) => {
+          this.netIncome = res.netIncome!;
+          this.maxLoan = res.maxLoanAmount!;
+          this.isEligible = res.eligible!;
+          this.message = res.message!;
+          
+          this.showResults = false;
+          
+          setTimeout(() => {
+            this.showResults = true;
+            this.isLoading = false;
+          }, 100);
+        },
+        error: (err) => {
+          console.error('Loan calculation error', err);
+          this.message = 'Failed to calculate loan eligibility. Please try again.';
+          this.showResults = false;
+          
+          setTimeout(() => {
+            this.showResults = true;
+            this.isLoading = false;
+          }, 100);
+        }
+      });
+    }, 1000); 
   }
 }

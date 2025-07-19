@@ -2,7 +2,6 @@
 
 A simple, elegant affordability calculator for Fin Africa that helps determine loan eligibility based on a user's monthly income and deductions.
 
-![UI Screenshot](./assets/screenshot.png)
 
 ---
 
@@ -19,7 +18,7 @@ This calculator is part of Fin Africa's loan prequalification tool. Users input 
 
 ## 🎯 Features
 
-- Clean and modern UI inspired by [Fin Africa](https://fin.africa) and LeadingSalons layout
+- Clean and modern UI inspired by [Fin Africa](https://fin.africa)
 - Responsive design (desktop + mobile)
 - Real-time backend calculation
 - Eligibility feedback & breakdown
